@@ -1,0 +1,18 @@
+#pass-button {
+    -fx-background-color: white;
+    -fx-background-radius: 22px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.06), 6, 0, 0, 2);
+}
+
+#pass-button:hover {
+    -fx-background-color: #fbfbfb;
+}
+
+#pass-button:pressed {
+    -fx-background-color: #f5f5f5;
+}
+
+#pass-button-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #5D5D5D;
+}

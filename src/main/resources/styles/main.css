@@ -1,0 +1,34 @@
+@import url("scroll_bar.css");
+@import url("course_list_item.css");
+@import url("sidebar.css");
+@import url("course_details.css");
+@import url("pass_button.css");
+
+@font-face {
+    src: url("/fonts/THSarabunNew_Bold.ttf");
+}
+
+@font-face {
+    src: url("/fonts/RSU_BOLD.ttf");
+}
+
+@font-face {
+    src: url("/fonts/RSU_Regular.ttf");
+}
+
+.root {
+    -fx-font-family: "RSU";
+    /*-fx-font-weight: bold;*/
+    -fx-font-size: 20px;
+}
+
+.scroll-pane {
+    -fx-background: #fafafc;
+}
+
+#course-section-label {
+    -fx-font-family: "TH Sarabun New";
+    -fx-text-fill: #707070;
+    -fx-font-size: 28px;
+    -fx-padding: 20px 0 0 10px;
+}

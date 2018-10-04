@@ -1,0 +1,24 @@
+#course-details-name {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4B4B4B;
+}
+
+#course-details-sub {
+    -fx-font-size: 16px;
+    -fx-text-fill: #838383;
+    -fx-padding: -6px 0 0 0;
+}
+
+#course-details-desc-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4B4B4B;
+    -fx-padding: 20px 0 4px 0;
+}
+
+#course-details-description {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8F8F8F;
+}

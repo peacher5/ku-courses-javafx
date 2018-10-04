@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root id="pass-button" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="44.0" prefWidth="152.0" type="VBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+        <Label id="pass-button-label" text="เรียนผ่านแล้ว">
+        </Label>
+   </children>
+</fx:root>
