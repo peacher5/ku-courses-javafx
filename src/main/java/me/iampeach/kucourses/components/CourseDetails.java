@@ -13,15 +13,21 @@ public class CourseDetails extends VBox {
     @FXML
     private Label nameLabel, subLabel, descriptionLabel;
 
-    public CourseDetails(Course course) {
+    private SideBar sideBar;
+
+    public CourseDetails(SideBar sideBar, Course course) {
+        this.sideBar = sideBar;
         loadFXML();
-        setText(course);
+        init(course);
     }
 
-    private void setText(Course course) {
+    private void init(Course course) {
         nameLabel.setText(course.getName());
         subLabel.setText(course.getId() + " - " + course.getCredit() + " หน่วยกิต");
         descriptionLabel.setText(course.getDescription());
+
+        PrerequisiteList prerequisiteList = new PrerequisiteList(sideBar, course.getPrerequisite());
+        getChildren().add(2, prerequisiteList);
     }
 
     private void loadFXML() {

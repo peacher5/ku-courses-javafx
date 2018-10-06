@@ -11,22 +11,25 @@ import java.io.IOException;
 
 public class CourseListItem extends AnchorPane {
     @FXML
-    private Label nameLabel, subLabel;
+    private Label titleLabel, subLabel;
 
-    public CourseListItem(Course course) {
-        loadFXML();
-        setText(course);
+    private SideBar sideBar;
+    private boolean isBigSize;
+
+    public CourseListItem(SideBar sideBar, Course course) {
+        this(sideBar, course, true);
     }
 
-    public void onClick(Runnable callback) {
-        setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY)
-                callback.run();
-        });
+    public CourseListItem(SideBar sideBar, Course course, boolean isBigSize) {
+        this.sideBar = sideBar;
+        this.isBigSize = isBigSize;
+
+        loadFXML();
+        init(course);
     }
 
     private void loadFXML() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/course_list_item.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(getLayoutPath()));
         loader.setRoot(this);
         loader.setController(this);
 
@@ -37,8 +40,19 @@ public class CourseListItem extends AnchorPane {
         }
     }
 
-    private void setText(Course course) {
-        nameLabel.setText(course.getName());
+    private String getLayoutPath() {
+        if (isBigSize)
+            return "/fxml/course_list_item.fxml";
+        return "/fxml/prerequisite_list_item.fxml";
+    }
+
+    private void init(Course course) {
+        titleLabel.setText(course.getName());
         subLabel.setText(course.getId() + " - " + course.getCredit() + " หน่วยกิต");
+
+        setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY)
+                sideBar.showCourseDetails(course);
+        });
     }
 }

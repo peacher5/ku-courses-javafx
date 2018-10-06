@@ -10,13 +10,12 @@ public class SideBar extends BorderPane {
 
     public SideBar() {
         setId("sidebar");
-        setPrefWidth(300);
         showDefault();
     }
 
     public void showCourseDetails(Course course) {
         // Course Details
-        CourseDetails courseDetails = new CourseDetails(course);
+        CourseDetails courseDetails = new CourseDetails(this, course);
         setCenter(courseDetails);
         setAlignment(courseDetails, Pos.TOP_LEFT);
 

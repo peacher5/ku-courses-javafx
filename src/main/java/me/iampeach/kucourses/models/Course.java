@@ -5,14 +5,14 @@ public class Course {
     private String name;
     private String description;
     private int credit;
-    private Course[] prerequisites;
+    private Prerequisite prerequisite;
 
-    public Course(String id, String name, String description, int credit, Course[] prerequisites) {
+    public Course(String id, String name, String description, int credit, Prerequisite prerequisite) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.credit = credit;
-        this.prerequisites = prerequisites;
+        this.prerequisite = prerequisite;
     }
 
     public String getId() {
@@ -31,7 +31,7 @@ public class Course {
         return credit;
     }
 
-    public Course[] getPrerequisites() {
-        return prerequisites;
+    public Prerequisite getPrerequisite() {
+        return prerequisite;
     }
 }

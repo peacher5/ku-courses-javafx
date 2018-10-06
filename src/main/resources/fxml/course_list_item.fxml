@@ -6,9 +6,9 @@
 
 <fx:root id="course-list-item" prefHeight="60.0" prefWidth="340.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label id="name-label" fx:id="nameLabel" text="Name" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Label id="course-list-item-title" fx:id="titleLabel" text="Name" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         </Label>
-        <Label id="sub-label" fx:id="subLabel" text="desc" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+        <Label id="course-list-item-sub" fx:id="subLabel" text="desc" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
         </Label>
     </children>
     <padding>
