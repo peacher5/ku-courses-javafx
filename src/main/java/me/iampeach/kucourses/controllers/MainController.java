@@ -2,14 +2,17 @@ package me.iampeach.kucourses.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import me.iampeach.kucourses.components.CourseListItem;
 import me.iampeach.kucourses.components.CourseSectionLabel;
 import me.iampeach.kucourses.components.SideBar;
 import me.iampeach.kucourses.models.Course;
-import me.iampeach.kucourses.models.Prerequisite;
+import me.iampeach.kucourses.models.CourseList;
+import me.iampeach.kucourses.utils.DatabaseUtils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +23,7 @@ public class MainController implements Initializable {
     private BorderPane root;
 
     @FXML
-    private GridPane gridContainer;
+    private VBox listContainer;
 
     @FXML
     private ScrollPane scrollWrapper;
@@ -32,41 +35,39 @@ public class MainController implements Initializable {
         if (System.getProperty("os.name").startsWith("Windows"))
             fixSlowScrolling();
 
+        // Init SideBar
         SideBar sideBar = new SideBar();
         root.setRight(sideBar);
 
-        Course cal = new Course("01417111", "Calculus I", "Test 123", 3, null);
-        Course python = new Course("01418112", "Fundamental Programming Concepts", "None", 3, new Prerequisite(Prerequisite.Type.ONE, new Course[]{cal, cal}));
+        // Init CourseList for 1st time
+        CourseList courseList = CourseList.getInstance(DatabaseUtils.getCourseListJSON());
 
-        CourseListItem calItem = new CourseListItem(sideBar, cal);
-        CourseListItem pyItem = new CourseListItem(sideBar, python);
+        // Display courses table
+        for (int year = 1; year <= 4; year++) {
+            HBox yearContainer = new HBox();
+            yearContainer.setSpacing(18);
+            yearContainer.setAlignment(Pos.CENTER);
 
-        gridContainer.add(new CourseSectionLabel("ปีที่ 1 ภาคต้น"), 0, 0);
-        gridContainer.add(calItem, 0, 1);
-        gridContainer.add(pyItem, 0, 2);
-        gridContainer.add(new CourseListItem(sideBar, cal), 0, 3);
-        gridContainer.add(new CourseListItem(sideBar, cal), 0, 4);
-        gridContainer.add(new CourseListItem(sideBar, cal), 0, 5);
+            for (int semester = 1; semester <= 2; semester++) {
+                VBox coursesContainer = new VBox();
+                coursesContainer.setSpacing(10);
 
-        gridContainer.add(new CourseSectionLabel("ปีที่ 1 ภาคปลาย"), 1, 0);
-        gridContainer.add(new CourseListItem(sideBar, cal), 1, 1);
-        gridContainer.add(new CourseListItem(sideBar, cal), 1, 2);
-        gridContainer.add(new CourseListItem(sideBar, cal), 1, 3);
+                String semesterText = semester == 1 ? "ต้น" : "ปลาย";
+                CourseSectionLabel label = new CourseSectionLabel(String.format("ปีที่ %d ภาค%s", year, semesterText));
+                coursesContainer.getChildren().add(label);
 
-        gridContainer.add(new CourseSectionLabel("ปีที่ 2 ภาคต้น"), 0, 6);
-        gridContainer.add(new CourseListItem(sideBar, cal), 0, 7);
-        gridContainer.add(new CourseListItem(sideBar, cal), 0, 8);
-        gridContainer.add(new CourseListItem(sideBar, cal), 0, 9);
+                Course[] courses = courseList.getAll(year, semester);
+                for (Course course : courses)
+                    coursesContainer.getChildren().add(new CourseListItem(sideBar, course));
 
-        gridContainer.add(new CourseSectionLabel("ปีที่ 2 ภาคปลาย"), 1, 6);
-        gridContainer.add(new CourseListItem(sideBar, cal), 1, 7);
-        gridContainer.add(new CourseListItem(sideBar, cal), 1, 8);
-        gridContainer.add(new CourseListItem(sideBar, cal), 1, 9);
-        gridContainer.add(new CourseListItem(sideBar, cal), 1, 10);
+                yearContainer.getChildren().add(coursesContainer);
+            }
+            listContainer.getChildren().add(yearContainer);
+        }
     }
 
     private void fixSlowScrolling() {
-        gridContainer.setOnScroll(event -> {
+        listContainer.setOnScroll(event -> {
             double deltaY = event.getDeltaY() * 6;
             double width = scrollWrapper.getContent().getBoundsInLocal().getWidth();
             double vValue = scrollWrapper.getVvalue();

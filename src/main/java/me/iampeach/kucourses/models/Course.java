@@ -3,15 +3,15 @@ package me.iampeach.kucourses.models;
 public class Course {
     private String id;
     private String name;
-    private String description;
     private int credit;
+    private String description;
     private Prerequisite prerequisite;
 
-    public Course(String id, String name, String description, int credit, Prerequisite prerequisite) {
+    public Course(String id, String name, int credit, String description, Prerequisite prerequisite) {
         this.id = id;
         this.name = name;
-        this.description = description;
         this.credit = credit;
+        this.description = description;
         this.prerequisite = prerequisite;
     }
 
@@ -23,15 +23,19 @@ public class Course {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public int getCredit() {
         return credit;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public Prerequisite getPrerequisite() {
         return prerequisite;
+    }
+
+    public boolean hasPrerequisite() {
+        return prerequisite != null;
     }
 }

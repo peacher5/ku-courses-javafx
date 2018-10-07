@@ -3,17 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1060.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.iampeach.kucourses.controllers.MainController">
    <center>
       <ScrollPane fx:id="scrollWrapper" fitToWidth="true" style="-fx-background-color: #000;" styleClass="edge-to-edge" BorderPane.alignment="CENTER">
          <content>
-            <GridPane fx:id="gridContainer" hgap="18.0" vgap="10.0">
+            <VBox fx:id="listContainer" spacing="10.0">
                <padding>
                   <Insets bottom="26.0" left="30.0" right="30.0" top="20.0" />
-               </padding>
-            </GridPane>
+               </padding></VBox>
          </content>
       </ScrollPane>
    </center>

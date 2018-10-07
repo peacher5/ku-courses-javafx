@@ -33,3 +33,12 @@
     -fx-font-size: 28px;
     -fx-padding: 20px 0 0 10px;
 }
+
+.tooltip {
+    -fx-background-color: white;
+    -fx-background-radius: 24px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 6, 0, 0, 2);
+    -fx-text-fill: #3e3e3e;
+    -fx-font-size: 16px;
+    -fx-padding: 4px 10px 4px 10px;
+}

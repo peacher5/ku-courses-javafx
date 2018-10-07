@@ -1,0 +1,325 @@
+[
+    {
+        "year": 1,
+        "semester": 1,
+        "courses": [
+            {
+                "id": "01417111",
+                "name": "Calculus I",
+                "credit": 3,
+                "description": "N/A"
+            },
+            {
+                "id": "01418112",
+                "name": "Fundamental Programming Concepts",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "TOGETHER",
+                    "courses": [
+                        "01418114"
+                    ]
+                }
+            },
+            {
+                "id": "01418114",
+                "name": "Introduction to Computer Science",
+                "credit": 2,
+                "description": "N/A"
+            },
+            {
+                "id": "01418131",
+                "name": "Digital Computer Logic",
+                "credit": 3,
+                "description": "N/A"
+            },
+            {
+                "id": "01999111",
+                "name": "Knowledge of the Land",
+                "credit": 2,
+                "description": "N/A"
+            }
+        ]
+    },
+    {
+        "year": 1,
+        "semester": 2,
+        "courses": [
+            {
+                "id": "01417112",
+                "name": "Calculus II",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01417111"
+                    ]
+                }
+            },
+            {
+                "id": "01418113",
+                "name": "Computer Programming",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418112"
+                    ]
+                }
+            },
+            {
+                "id": "01418132",
+                "name": "Fundamentals of Computing",
+                "credit": 4,
+                "description": "N/A"
+            }
+        ]
+    },
+    {
+        "year": 2,
+        "semester": 1,
+        "courses": [
+            {
+                "id": "01417322",
+                "name": "Basic Linear Algebra",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01417112"
+                    ]
+                }
+            },
+            {
+                "id": "01418211",
+                "name": "Software Construction",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418113"
+                    ]
+                }
+            },
+            {
+                "id": "01418231",
+                "name": "Data Structures",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418113"
+                    ]
+                }
+            },
+            {
+                "id": "01422111",
+                "name": "Principles of Statistics",
+                "credit": 3,
+                "description": "N/A"
+            }
+        ]
+    },
+    {
+        "year": 2,
+        "semester": 2,
+        "courses": [
+            {
+                "id": "01418221",
+                "name": "Fundamentals of Database Systems",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418113"
+                    ]
+                }
+            },
+            {
+                "id": "01418232",
+                "name": "Algorithms Design and Analysis",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418132",
+                        "01418231"
+                    ]
+                }
+            },
+            {
+                "id": "01418233",
+                "name": "Assembly Language and Computer Architecture",
+                "credit": 4,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418113",
+                        "01418131"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "year": 3,
+        "semester": 1,
+        "courses": [
+            {
+                "id": "01418321",
+                "name": "System Analysis and Design",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418211",
+                        "01418221"
+                    ]
+                }
+            },
+            {
+                "id": "01418331",
+                "name": "Operating Systems",
+                "credit": 4,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418233"
+                    ]
+                }
+            },
+            {
+                "id": "01418341",
+                "name": "Intellectual Properties and Professional Ethics",
+                "credit": 3,
+                "description": "N/A"
+            },
+            {
+                "id": "01418497",
+                "name": "Seminar",
+                "credit": 1,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ONE",
+                    "courses": [
+                        "01418221",
+                        "01418232",
+                        "01418233"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "year": 3,
+        "semester": 2,
+        "courses": [
+            {
+                "id": "01418332",
+                "name": "Infomation System Security",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418331"
+                    ]
+                }
+            },
+            {
+                "id": "01418333",
+                "name": "Automata Theory",
+                "credit": 2,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418132"
+                    ]
+                }
+            },
+            {
+                "id": "01418334",
+                "name": "Compiler Techniques",
+                "credit": 2,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "TOGETHER",
+                    "courses": [
+                        "01418333"
+                    ]
+                }
+            },
+            {
+                "id": "01418351",
+                "name": "Computer Communications and Cloud Computing Principles",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418331"
+                    ]
+                }
+            },
+            {
+                "id": "01418390",
+                "name": "Cooperative Education Preparation",
+                "credit": 1,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418321"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "year": 4,
+        "semester": 1,
+        "courses": [
+            {
+                "id": "01418490",
+                "name": "Cooperative Education",
+                "credit": 6,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418390"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "year": 4,
+        "semester": 2,
+        "courses": [
+            {
+                "id": "01418499",
+                "name": "Computer Science Project",
+                "credit": 3,
+                "description": "N/A",
+                "prerequisite": {
+                    "type": "ALL",
+                    "courses": [
+                        "01418321"
+                    ]
+                }
+            }
+        ]
+    }
+]

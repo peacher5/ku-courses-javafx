@@ -2,7 +2,7 @@ package me.iampeach.kucourses.models;
 
 public class Prerequisite {
     private Type type;
-    private Course[] courses;
+    private String[] courses;
 
     public enum Type {
         ONE,
@@ -10,7 +10,7 @@ public class Prerequisite {
         TOGETHER
     }
 
-    public Prerequisite(Type type, Course[] courses) {
+    public Prerequisite(Type type, String[] courses) {
         this.type = type;
         this.courses = courses;
     }
@@ -19,7 +19,7 @@ public class Prerequisite {
         return type;
     }
 
-    public Course[] getCourses() {
+    public String[] getCourses() {
         return courses;
     }
 }
