@@ -40,7 +40,9 @@ public class MainController implements Initializable {
         root.setRight(sideBar);
 
         // Init CourseList for 1st time
-        CourseList courseList = CourseList.getInstance(DatabaseUtils.getCourseListJSON());
+        CourseList courseList = CourseList.getInstance(
+                DatabaseUtils.getCourseGroupsJson(),
+                DatabaseUtils.getPassedCoursesJson());
 
         // Display courses table
         for (int year = 1; year <= 4; year++) {

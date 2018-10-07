@@ -6,6 +6,8 @@ public class Course {
     private int credit;
     private String description;
     private Prerequisite prerequisite;
+    private boolean isPassed;
+    private onPassToggleListener listener;
 
     public Course(String id, String name, int credit, String description, Prerequisite prerequisite) {
         this.id = id;
@@ -35,7 +37,18 @@ public class Course {
         return prerequisite;
     }
 
-    public boolean hasPrerequisite() {
-        return prerequisite != null;
+    public void setPassed(boolean passed) {
+        isPassed = passed;
+
+        if (listener != null)
+            listener.onToggle(isPassed);
+    }
+
+    public boolean isPassed() {
+        return isPassed;
+    }
+
+    public void setOnPassToggleListener(onPassToggleListener listener) {
+        this.listener = listener;
     }
 }

@@ -7,12 +7,22 @@ import java.nio.file.Paths;
 
 public class DatabaseUtils {
 
-    public static String getCourseListJSON() {
+    public static String getCourseGroupsJson() {
         String json = null;
         try {
             json = readFile("/database/courses_60.json");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        return json;
+    }
+
+    public static String getPassedCoursesJson() {
+        String json;
+        try {
+            json = readFile("/database/user.json");
+        } catch (IOException e) {
+            return null;
         }
         return json;
     }

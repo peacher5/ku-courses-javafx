@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 
-<fx:root id="pass-button" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="44.0" prefWidth="152.0" type="VBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root id="pass-button" alignment="CENTER" maxWidth="152.0" prefHeight="44.0" prefWidth="152.0" type="HBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-        <Label id="pass-button-label" text="เรียนผ่านแล้ว">
+      <ImageView fx:id="iconView" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets right="8.0" />
+         </HBox.margin>
+      </ImageView>
+        <Label id="pass-button-label" fx:id="label">
         </Label>
    </children>
 </fx:root>

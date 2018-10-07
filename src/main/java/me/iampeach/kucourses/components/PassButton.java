@@ -1,19 +1,55 @@
 package me.iampeach.kucourses.components;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import me.iampeach.kucourses.models.Course;
 
 import java.io.IOException;
 
-public class PassButton extends VBox {
+public class PassButton extends HBox {
 
-    public PassButton() {
+    @FXML
+    private Label label;
+
+    @FXML
+    private ImageView iconView;
+
+    public PassButton(Course course) {
         loadFXML();
-        onClick(() -> System.out.println("Button click"));
+        init(course);
     }
 
-    public void onClick(Runnable callback) {
+    private void init(Course course) {
+        if (course.isPassed())
+            setCancelState();
+        else
+            setPassState();
+
+        onClick(() -> {
+            course.setPassed(!course.isPassed());
+            if (course.isPassed())
+                setCancelState();
+            else
+                setPassState();
+        });
+    }
+
+    private void setPassState() {
+        label.setText("เรียนผ่านแล้ว");
+        iconView.setImage(new Image("/icons/pass_gray_icon.png"));
+    }
+
+    private void setCancelState() {
+        label.setText("ยกเลิก");
+        iconView.setImage(new Image("/icons/cancel_gray_icon.png"));
+    }
+
+    private void onClick(Runnable callback) {
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY)
                 callback.run();

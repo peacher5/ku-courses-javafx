@@ -3,6 +3,8 @@ package me.iampeach.kucourses.components;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import me.iampeach.kucourses.models.Course;
@@ -13,16 +15,19 @@ public class CourseListItem extends AnchorPane {
     @FXML
     private Label titleLabel, subLabel;
 
+    @FXML
+    private ImageView iconView;
+
     private SideBar sideBar;
-    private boolean isBigSize;
+    private boolean isPrerequisiteMode;
 
     public CourseListItem(SideBar sideBar, Course course) {
-        this(sideBar, course, true);
+        this(sideBar, course, false);
     }
 
-    public CourseListItem(SideBar sideBar, Course course, boolean isBigSize) {
+    public CourseListItem(SideBar sideBar, Course course, boolean isPrerequisiteMode) {
         this.sideBar = sideBar;
-        this.isBigSize = isBigSize;
+        this.isPrerequisiteMode = isPrerequisiteMode;
 
         loadFXML();
         init(course);
@@ -41,18 +46,38 @@ public class CourseListItem extends AnchorPane {
     }
 
     private String getLayoutPath() {
-        if (isBigSize)
-            return "/fxml/course_list_item.fxml";
-        return "/fxml/prerequisite_list_item.fxml";
+        if (isPrerequisiteMode)
+            return "/fxml/prerequisite_list_item.fxml";
+        return "/fxml/course_list_item.fxml";
     }
 
     private void init(Course course) {
         titleLabel.setText(course.getName());
         subLabel.setText(course.getId() + " - " + course.getCredit() + " หน่วยกิต");
 
+        if (!isPrerequisiteMode) {
+            if (course.isPassed())
+                setPassedIcon();
+
+            course.setOnPassToggleListener(isPassed -> {
+                if (isPassed)
+                    setPassedIcon();
+                else
+                    clearIcon();
+            });
+        }
+
         setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY)
                 sideBar.showCourseDetails(course);
         });
+    }
+
+    private void setPassedIcon() {
+        iconView.setImage(new Image("/icons/passed_icon.png"));
+    }
+
+    private void clearIcon() {
+        iconView.setImage(null);
     }
 }

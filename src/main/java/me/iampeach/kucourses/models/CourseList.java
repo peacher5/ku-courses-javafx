@@ -7,21 +7,31 @@ public class CourseList {
     private static CourseList courseList;
     private CourseGroup[] courseGroups;
 
-    private CourseList(String json) {
+    private CourseList(String courseGroupsJson, String passedCoursesJson) {
         Gson gson = new Gson();
-        this.courseGroups = gson.fromJson(json, CourseGroup[].class);
+        this.courseGroups = gson.fromJson(courseGroupsJson, CourseGroup[].class);
+
+        if (passedCoursesJson != null) {
+            PassedCourses passedCourses = gson.fromJson(passedCoursesJson, PassedCourses.class);
+            for (String courseId : passedCourses.getPassedCoursesId())
+                getById(courseId).setPassed(true);
+        }
     }
 
     public static CourseList getInstance() {
-        if (courseList == null)
-            throw new IllegalStateException("CourseList must have courses data provided for first time");
-        return courseList;
+        return getInstance(null, null);
     }
 
-    public static CourseList getInstance(String json) {
+    public static CourseList getInstance(String courseGroupsJson) {
+        return getInstance(courseGroupsJson, null);
+    }
+
+    public static CourseList getInstance(String courseGroupsJson, String passedCoursesJson) {
         if (courseList != null)
             return courseList;
-        courseList = new CourseList(json);
+        if (courseGroupsJson == null)
+            throw new IllegalStateException("CourseList must have courses data provided for first time");
+        courseList = new CourseList(courseGroupsJson, passedCoursesJson);
         return courseList;
     }
 

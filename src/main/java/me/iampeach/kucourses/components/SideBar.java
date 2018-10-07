@@ -20,7 +20,7 @@ public class SideBar extends BorderPane {
         setAlignment(courseDetails, Pos.TOP_LEFT);
 
         // Pass Button
-        PassButton passButton = new PassButton();
+        PassButton passButton = new PassButton(course);
         setBottom(passButton);
         setAlignment(passButton, Pos.CENTER);
         setMargin(passButton, new Insets(0, 0, 44, 0));
