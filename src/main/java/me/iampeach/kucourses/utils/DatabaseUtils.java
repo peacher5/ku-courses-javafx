@@ -28,7 +28,7 @@ public class DatabaseUtils {
     }
 
     private static String readFile(String path) throws IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(DatabaseUtils.class.getResource(path).getPath()));
+        byte[] encoded = DatabaseUtils.class.getResourceAsStream(path).readAllBytes();
         return new String(encoded, StandardCharsets.UTF_8);
     }
 }
