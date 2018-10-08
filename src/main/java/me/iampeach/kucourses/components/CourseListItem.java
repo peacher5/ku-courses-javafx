@@ -18,14 +18,14 @@ public class CourseListItem extends AnchorPane {
     @FXML
     private ImageView iconView;
 
-    private SideBar sideBar;
-    private boolean isPrerequisiteMode;
+    private final SideBar sideBar;
+    private final boolean isPrerequisiteMode;
 
     public CourseListItem(SideBar sideBar, Course course) {
         this(sideBar, course, false);
     }
 
-    public CourseListItem(SideBar sideBar, Course course, boolean isPrerequisiteMode) {
+    CourseListItem(SideBar sideBar, Course course, boolean isPrerequisiteMode) {
         this.sideBar = sideBar;
         this.isPrerequisiteMode = isPrerequisiteMode;
 

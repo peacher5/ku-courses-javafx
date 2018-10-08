@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 public class CourseList {
 
     private static CourseList courseList;
-    private CourseGroup[] courseGroups;
+    private final CourseGroup[] courseGroups;
 
     private CourseList(String courseGroupsJson, String passedCoursesJson) {
         Gson gson = new Gson();
@@ -20,10 +20,6 @@ public class CourseList {
 
     public static CourseList getInstance() {
         return getInstance(null, null);
-    }
-
-    public static CourseList getInstance(String courseGroupsJson) {
-        return getInstance(courseGroupsJson, null);
     }
 
     public static CourseList getInstance(String courseGroupsJson, String passedCoursesJson) {

@@ -13,7 +13,7 @@ public class SideBar extends BorderPane {
         showDefault();
     }
 
-    public void showCourseDetails(Course course) {
+    void showCourseDetails(Course course) {
         // Course Details
         CourseDetails courseDetails = new CourseDetails(this, course);
         setCenter(courseDetails);

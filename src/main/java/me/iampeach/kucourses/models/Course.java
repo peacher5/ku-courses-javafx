@@ -1,11 +1,11 @@
 package me.iampeach.kucourses.models;
 
 public class Course {
-    private String id;
-    private String name;
-    private int credit;
-    private String description;
-    private Prerequisite prerequisite;
+    private final String id;
+    private final String name;
+    private final int credit;
+    private final String description;
+    private final Prerequisite prerequisite;
     private boolean isPassed;
     private onPassToggleListener listener;
 

@@ -11,7 +11,7 @@ import me.iampeach.kucourses.models.Course;
 
 import java.io.IOException;
 
-public class PassButton extends HBox {
+class PassButton extends HBox {
 
     @FXML
     private Label label;
@@ -19,7 +19,7 @@ public class PassButton extends HBox {
     @FXML
     private ImageView iconView;
 
-    public PassButton(Course course) {
+    PassButton(Course course) {
         loadFXML();
         init(course);
     }

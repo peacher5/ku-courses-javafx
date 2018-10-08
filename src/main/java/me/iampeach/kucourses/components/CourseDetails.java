@@ -10,20 +10,18 @@ import me.iampeach.kucourses.models.Course;
 
 import java.io.IOException;
 
-public class CourseDetails extends VBox {
+class CourseDetails extends VBox {
 
     @FXML
     private Label nameLabel, subLabel, descriptionLabel;
 
-    private SideBar sideBar;
 
-    public CourseDetails(SideBar sideBar, Course course) {
-        this.sideBar = sideBar;
+    CourseDetails(SideBar sideBar, Course course) {
         loadFXML();
-        init(course);
+        init(sideBar, course);
     }
 
-    private void init(Course course) {
+    private void init(SideBar sideBar, Course course) {
         nameLabel.setText(course.getName());
 
         Tooltip tooltip = new Tooltip(course.getName());

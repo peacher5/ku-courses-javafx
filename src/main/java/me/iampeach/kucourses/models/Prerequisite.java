@@ -1,8 +1,8 @@
 package me.iampeach.kucourses.models;
 
 public class Prerequisite {
-    private Type type;
-    private String[] courses;
+    private final Type type;
+    private final String[] courses;
 
     public enum Type {
         ONE,

@@ -2,13 +2,13 @@ package me.iampeach.kucourses.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PassedCourses {
+class PassedCourses {
 
     @SerializedName("course_year")
-    private String courseYear;
+    private final String courseYear;
 
     @SerializedName("passed")
-    private String[] passedCoursesId;
+    private final String[] passedCoursesId;
 
     public PassedCourses(String courseYear, String[] passedCoursesId) {
         this.courseYear = courseYear;

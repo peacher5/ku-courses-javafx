@@ -9,14 +9,14 @@ import me.iampeach.kucourses.models.Prerequisite;
 
 import java.io.IOException;
 
-public class PrerequisiteList extends VBox {
+class PrerequisiteList extends VBox {
 
     @FXML
     private Label type;
 
     private SideBar sideBar;
 
-    public PrerequisiteList(SideBar sideBar, Prerequisite prerequisite) {
+    PrerequisiteList(SideBar sideBar, Prerequisite prerequisite) {
         if (prerequisite != null) {
             this.sideBar = sideBar;
             loadFXML();
