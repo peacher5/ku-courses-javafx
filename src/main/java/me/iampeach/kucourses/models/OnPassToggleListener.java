@@ -1,5 +1,5 @@
 package me.iampeach.kucourses.models;
 
-public interface onPassToggleListener {
+public interface OnPassToggleListener {
     void onToggle(boolean isPassed);
 }
