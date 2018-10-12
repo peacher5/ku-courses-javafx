@@ -1,6 +1,7 @@
 package me.iampeach.kucourses.models;
 
 import com.google.gson.Gson;
+import me.iampeach.kucourses.utils.DatabaseUtils;
 
 public class CourseList {
 
@@ -11,11 +12,10 @@ public class CourseList {
         Gson gson = new Gson();
         this.courseGroups = gson.fromJson(courseGroupsJson, CourseGroup[].class);
 
-        if (passedCoursesJson != null) {
-            PassedCourses passedCourses = gson.fromJson(passedCoursesJson, PassedCourses.class);
-            for (String courseId : passedCourses.getPassedCoursesId())
-                getById(courseId).setPassed(true);
-        }
+        PassedCourses passedCourses = DatabaseUtils.getPassedCourses();
+
+        for (String courseId : passedCourses.getPassedCoursesId())
+            getById(courseId).setPassed(true);
     }
 
     public static CourseList getInstance() {

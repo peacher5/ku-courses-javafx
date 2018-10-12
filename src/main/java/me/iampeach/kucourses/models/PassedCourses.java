@@ -2,7 +2,7 @@ package me.iampeach.kucourses.models;
 
 import com.google.gson.annotations.SerializedName;
 
-class PassedCourses {
+public class PassedCourses {
 
     @SerializedName("course_year")
     private final String courseYear;
