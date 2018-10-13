@@ -3,22 +3,39 @@ package me.iampeach.kucourses.controllers;
 import me.iampeach.kucourses.models.PassedCourses;
 import me.iampeach.kucourses.models.Prerequisite;
 import me.iampeach.kucourses.utils.DatabaseUtils;
+import me.iampeach.kucourses.utils.Helper;
 import me.iampeach.kucourses.utils.NotifyUtils;
 
 import java.util.Arrays;
 
 public class CourseController {
-    public static void setPassedCourse(String courseId, Prerequisite prerequisite) {
+    public static boolean setPassedCourse(String courseId, Prerequisite prerequisite) {
         PassedCourses passedCourses = DatabaseUtils.getPassedCourses();
         int length = passedCourses.passedCoursesId.length;
 
-        if (prerequisite.getType().equals(Prerequisite.Type.ALL)) {
-            // check all is pass
+        if (prerequisite != null) {
+            String[] prerequisiteCourses = prerequisite.getCourses();
 
-        }
+            if (prerequisite.getType().equals(Prerequisite.Type.ALL)) {
+                if (!Helper.containAllString(passedCourses.passedCoursesId, prerequisiteCourses)) {
+                    NotifyUtils.warning("you must passes all prerequisite courses before");
+                    return false;
+                }
+            }
 
-        if (prerequisite.getType().equals(Prerequisite.Type.ONE)) {
-            // check is one is there
+            if (prerequisite.getType().equals(Prerequisite.Type.ONE)) {
+                boolean passes = false;
+                for (int i = 0; i < prerequisiteCourses.length; ++i) {
+                    if (Helper.containString(passedCourses.passedCoursesId, prerequisiteCourses[i])) {
+                        passes = true;
+                    }
+                }
+                if (!passes) {
+                    NotifyUtils.warning("you must passes prerequisite courses at least one course");
+                    return false;
+                }
+            }
+
         }
 
         String[] passedCoursesId = Arrays.copyOf(passedCourses.passedCoursesId, length + 1);
@@ -27,15 +44,16 @@ public class CourseController {
         passedCourses.passedCoursesId = passedCoursesId;
 
         DatabaseUtils.writePassesCourses(passedCourses);
+
+        return true;
     }
 
-    public static void unsetPassedCourse(String courseId) {
+    public static boolean unsetPassedCourse(String courseId) {
         PassedCourses passedCourses = DatabaseUtils.getPassedCourses();
-        boolean isContain = Arrays.stream(passedCourses.passedCoursesId).anyMatch(courseId::equals);
 
-        if (!isContain) {
+        if (!Helper.containString(passedCourses.passedCoursesId, courseId)) {
             NotifyUtils.error(String.format("%s does not found in database", courseId));
-            return;
+            return false;
         }
 
         int index = 0;
@@ -52,5 +70,7 @@ public class CourseController {
         passedCourses.passedCoursesId = passedCoursesId;
 
         DatabaseUtils.writePassesCourses(passedCourses);
+
+        return true;
     }
 }
