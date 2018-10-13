@@ -8,7 +8,7 @@ public class CourseList {
     private static CourseList courseList;
     private final CourseGroup[] courseGroups;
 
-    private CourseList(String courseGroupsJson, String passedCoursesJson) {
+    private CourseList(String courseGroupsJson) {
         Gson gson = new Gson();
         this.courseGroups = gson.fromJson(courseGroupsJson, CourseGroup[].class);
 
@@ -19,15 +19,15 @@ public class CourseList {
     }
 
     public static CourseList getInstance() {
-        return getInstance(null, null);
+        return getInstance(null);
     }
 
-    public static CourseList getInstance(String courseGroupsJson, String passedCoursesJson) {
+    public static CourseList getInstance(String courseGroupsJson) {
         if (courseList != null)
             return courseList;
         if (courseGroupsJson == null)
             throw new IllegalStateException("CourseList must have courses data provided for first time");
-        courseList = new CourseList(courseGroupsJson, passedCoursesJson);
+        courseList = new CourseList(courseGroupsJson);
         return courseList;
     }
 
