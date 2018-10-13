@@ -1,15 +1,25 @@
 package me.iampeach.kucourses.controllers;
 
 import me.iampeach.kucourses.models.PassedCourses;
+import me.iampeach.kucourses.models.Prerequisite;
 import me.iampeach.kucourses.utils.DatabaseUtils;
 import me.iampeach.kucourses.utils.NotifyUtils;
 
 import java.util.Arrays;
 
 public class CourseController {
-    public static void setPassedCourse(String courseId) {
+    public static void setPassedCourse(String courseId, Prerequisite prerequisite) {
         PassedCourses passedCourses = DatabaseUtils.getPassedCourses();
         int length = passedCourses.passedCoursesId.length;
+
+        if (prerequisite.getType().equals(Prerequisite.Type.ALL)) {
+            // check all is pass
+
+        }
+
+        if (prerequisite.getType().equals(Prerequisite.Type.ONE)) {
+            // check is one is there
+        }
 
         String[] passedCoursesId = Arrays.copyOf(passedCourses.passedCoursesId, length + 1);
         passedCoursesId[length] = courseId;

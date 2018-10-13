@@ -34,7 +34,7 @@ class PassButton extends HBox {
         onClick(() -> {
             course.setPassed(!course.isPassed());
             if (course.isPassed()) {
-                CourseController.setPassedCourse(course.getId());
+                CourseController.setPassedCourse(course.getId(), course.getPrerequisite());
             } else {
                 CourseController.unsetPassedCourse(course.getId());
             }
