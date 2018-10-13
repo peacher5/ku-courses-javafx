@@ -2,6 +2,7 @@ package me.iampeach.kucourses.controllers;
 
 import me.iampeach.kucourses.models.PassedCourses;
 import me.iampeach.kucourses.utils.DatabaseUtils;
+import me.iampeach.kucourses.utils.NotifyUtils;
 
 import java.util.Arrays;
 
@@ -23,7 +24,7 @@ public class CourseController {
         boolean isContain = Arrays.stream(passedCourses.passedCoursesId).anyMatch(courseId::equals);
 
         if (!isContain) {
-            // notify err here
+            NotifyUtils.error(String.format("%s does not found in database", courseId));
             return;
         }
 
