@@ -8,13 +8,16 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    private static final int MIN_WIDTH = 1060;
+    private static final int MIN_HEIGHT = 690;
+
     @Override
     public void start(Stage window) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
         window.setTitle("KU Courses");
-        window.setScene(new Scene(root, 1060, 690));
-        window.setMinWidth(1060);
-        window.setMinHeight(690);
+        window.setScene(new Scene(root, MIN_WIDTH, MIN_HEIGHT));
+        window.setMinWidth(MIN_WIDTH);
+        window.setMinHeight(MIN_HEIGHT);
         window.show();
     }
 

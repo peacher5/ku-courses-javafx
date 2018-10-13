@@ -41,8 +41,7 @@ public class MainController implements Initializable {
 
         // Init CourseList for 1st time
         CourseList courseList = CourseList.getInstance(
-                DatabaseUtils.getCourseGroupsJson(),
-                DatabaseUtils.getPassedCoursesJson());
+                DatabaseUtils.getCourseGroupsJson());
 
         // Display courses table
         for (int year = 1; year <= 4; year++) {

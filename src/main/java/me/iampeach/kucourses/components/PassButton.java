@@ -32,8 +32,23 @@ class PassButton extends HBox {
             setPassState();
 
         onClick(() -> {
+            boolean success;
+            boolean prevStage = course.isPassed();
+
             course.setPassed(!course.isPassed());
-            CourseController.setPassedCourse(course.getId());
+
+            if (course.isPassed()) {
+                success = CourseController.setPassedCourse(course.getId(), course.getPrerequisite());
+            } else {
+                success = CourseController.unsetPassedCourse(course.getId());
+            }
+
+            if (!success) {
+                course.setPassed(prevStage);
+                return;
+            }
+
+            course.updateListener();
 
             if (course.isPassed())
                 setCancelState();

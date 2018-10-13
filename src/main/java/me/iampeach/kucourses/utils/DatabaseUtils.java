@@ -12,6 +12,8 @@ import java.nio.file.Paths;
 public class DatabaseUtils {
     private static PassedCourses passedCourses;
 
+    private static final String USER_DATABASE = "user.json";
+
     private static final String passedCoursesDatabase = "/database/user.json";
     private static final String courseListDatabase = "/database/courses_60.json";
 
@@ -38,12 +40,12 @@ public class DatabaseUtils {
     }
 
     public static void loadPassedCourses() {
-        File f = new File("user.json");
+        File f = new File(USER_DATABASE);
 
         // create new file if database not exist
         if (!f.exists()) {
             try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream("user.json"), "utf-8"))) {
+                    new FileOutputStream(USER_DATABASE), "utf-8"))) {
                 writer.write(getPassedCoursesJson());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -54,7 +56,7 @@ public class DatabaseUtils {
 
         // read file and puts it to Gson
         try {
-            String userJson = new String(Files.readAllBytes(Paths.get("user.json")));
+            String userJson = new String(Files.readAllBytes(Paths.get(USER_DATABASE)));
             passedCourses = gson.fromJson(userJson, PassedCourses.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +72,7 @@ public class DatabaseUtils {
     }
 
     public static void writePassesCourses(PassedCourses passedCourses) {
-        try (Writer writer = new FileWriter("user.json")) {
+        try (Writer writer = new FileWriter(USER_DATABASE)) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(passedCourses, writer);
         } catch (IOException e) {
