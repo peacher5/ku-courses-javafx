@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
+import me.iampeach.kucourses.controllers.CourseController;
 import me.iampeach.kucourses.models.Course;
 
 import java.io.IOException;
@@ -32,6 +33,8 @@ class PassButton extends HBox {
 
         onClick(() -> {
             course.setPassed(!course.isPassed());
+            CourseController.setPassedCourse(course.getId());
+
             if (course.isPassed())
                 setCancelState();
             else

@@ -1,17 +1,21 @@
 package me.iampeach.kucourses.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import me.iampeach.kucourses.models.PassedCourses;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class DatabaseUtils {
     private static PassedCourses passedCourses;
 
     private static final String passedCoursesDatabase = "/database/user.json";
     private static final String courseListDatabase = "/database/courses_60.json";
+
+    private DatabaseUtils() { }
 
     public static String getCourseGroupsJson() {
         String json = null;
@@ -34,8 +38,27 @@ public class DatabaseUtils {
     }
 
     public static void loadPassedCourses() {
+        File f = new File("user.json");
+
+        // create new file if database not exist
+        if (!f.exists()) {
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream("user.json"), "utf-8"))) {
+                writer.write(getPassedCoursesJson());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         Gson gson = new Gson();
-        passedCourses = gson.fromJson(getPassedCoursesJson(), PassedCourses.class);
+
+        // read file and puts it to Gson
+        try {
+            String userJson = new String(Files.readAllBytes(Paths.get("user.json")));
+            passedCourses = gson.fromJson(userJson, PassedCourses.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static PassedCourses getPassedCourses() {
@@ -47,9 +70,9 @@ public class DatabaseUtils {
     }
 
     public static void writePassesCourses(PassedCourses passedCourses) {
-        Gson gson = new Gson();
-        try {
-            gson.toJson(passedCourses, new FileWriter(passedCoursesDatabase));
+        try (Writer writer = new FileWriter("user.json")) {
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(passedCourses, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }

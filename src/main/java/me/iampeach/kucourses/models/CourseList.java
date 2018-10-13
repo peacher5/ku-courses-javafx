@@ -14,7 +14,7 @@ public class CourseList {
 
         PassedCourses passedCourses = DatabaseUtils.getPassedCourses();
 
-        for (String courseId : passedCourses.getPassedCoursesId())
+        for (String courseId : passedCourses.passedCoursesId)
             getById(courseId).setPassed(true);
     }
 
