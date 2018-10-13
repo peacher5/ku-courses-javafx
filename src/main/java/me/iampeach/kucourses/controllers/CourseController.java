@@ -11,6 +11,7 @@ import java.util.Arrays;
 public class CourseController {
     public static boolean setPassedCourse(String courseId, Prerequisite prerequisite) {
         PassedCourses passedCourses = DatabaseUtils.getPassedCourses();
+        String[] passCourses = passedCourses.passedCoursesId;
         int length = passedCourses.passedCoursesId.length;
 
         if (prerequisite != null) {

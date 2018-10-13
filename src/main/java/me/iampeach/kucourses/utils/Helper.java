@@ -10,6 +10,7 @@ public class Helper {
 
     public static boolean containAllString(String[] arr, String[] another) {
         int index = Collections.indexOfSubList(Arrays.asList(arr), Arrays.asList(another));
+
         return index >= 0 ? true : false;
     }
 }
