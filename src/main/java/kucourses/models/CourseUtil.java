@@ -18,6 +18,12 @@ public class CourseUtil {
         return true;
     }
 
+    public static void setOnPassToggleListenerToAllCourses(OnPassToggleListener listener) {
+        for (CourseGroup courseGroup : CourseData.getInstance().getAll())
+            for (Course course : courseGroup.getCourses())
+                course.setOnPassToggleListener(listener);
+    }
+
     private static boolean isAnyPassed(String[] courseIds) {
         for (String courseId : courseIds) {
             Course preCourse = CourseData.getInstance().getById(courseId);

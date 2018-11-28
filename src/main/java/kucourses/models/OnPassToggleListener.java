@@ -1,5 +1,5 @@
 package kucourses.models;
 
 public interface OnPassToggleListener {
-    void onToggle(boolean isPassed);
+    void onToggle(Course course);
 }

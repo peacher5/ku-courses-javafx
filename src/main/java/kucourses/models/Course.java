@@ -1,5 +1,7 @@
 package kucourses.models;
 
+import java.util.ArrayList;
+
 public class Course {
     private final String id;
     private final String name;
@@ -7,7 +9,7 @@ public class Course {
     private final String description;
     private final Prerequisite prerequisite;
     private boolean isPassed;
-    private OnPassToggleListener listener;
+    private ArrayList<OnPassToggleListener> listeners;
 
     public Course(String id, String name, int credit, String description, Prerequisite prerequisite) {
         this.id = id;
@@ -40,8 +42,10 @@ public class Course {
     public void setPassed(boolean passed) {
         isPassed = passed;
 
-        if (listener != null)
-            listener.onToggle(isPassed);
+        if (listeners != null) {
+            for (OnPassToggleListener listener : listeners)
+                listener.onToggle(this);
+        }
     }
 
     public boolean isPassed() {
@@ -49,6 +53,8 @@ public class Course {
     }
 
     public void setOnPassToggleListener(OnPassToggleListener listener) {
-        this.listener = listener;
+        if (listeners == null)
+            listeners = new ArrayList<>();
+        listeners.add(listener);
     }
 }

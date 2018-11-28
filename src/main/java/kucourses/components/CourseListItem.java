@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import kucourses.models.Course;
+import kucourses.models.CourseUtil;
 
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ public class CourseListItem extends AnchorPane {
 
     private final SideBar sideBar;
     private final boolean isPrerequisiteMode;
+    private Course course;
 
     public CourseListItem(SideBar sideBar, Course course) {
         this(sideBar, course, false);
@@ -28,9 +30,10 @@ public class CourseListItem extends AnchorPane {
     CourseListItem(SideBar sideBar, Course course, boolean isPrerequisiteMode) {
         this.sideBar = sideBar;
         this.isPrerequisiteMode = isPrerequisiteMode;
+        this.course = course;
 
         loadFXML();
-        init(course);
+        init();
     }
 
     private void loadFXML() {
@@ -51,19 +54,33 @@ public class CourseListItem extends AnchorPane {
         return "/fxml/course_list_item.fxml";
     }
 
-    private void init(Course course) {
+    private void init() {
         titleLabel.setText(course.getName());
         subLabel.setText(course.getId() + " - " + course.getCredit() + " หน่วยกิต");
 
         if (!isPrerequisiteMode) {
             if (course.isPassed())
                 setPassedIcon();
+            else if (!CourseUtil.isAvailable(course))
+                setLockedIcon();
+            else if (course.getPrerequisite() != null)
+                setUnlockedIcon();
+            else
+                setNoIcon();
 
-            course.setOnPassToggleListener(isPassed -> {
-                if (isPassed)
-                    setPassedIcon();
-                else
-                    clearIcon();
+            CourseUtil.setOnPassToggleListenerToAllCourses(eachCourse -> {
+                if (CourseUtil.isAvailable(course)) {
+                    if (course.isPassed())
+                        setPassedIcon();
+                    else if (course.getPrerequisite() != null)
+                        setUnlockedIcon();
+                    else
+                        setNoIcon();
+                } else {
+                    if (course.isPassed())
+                        course.setPassed(false);
+                    setLockedIcon();
+                }
             });
         }
 
@@ -77,7 +94,15 @@ public class CourseListItem extends AnchorPane {
         iconView.setImage(new Image("/icons/passed_icon.png"));
     }
 
-    private void clearIcon() {
+    private void setLockedIcon() {
+        iconView.setImage(new Image("/icons/lock_icon.png"));
+    }
+
+    private void setUnlockedIcon() {
+        iconView.setImage(new Image("/icons/unlock_icon.png"));
+    }
+
+    private void setNoIcon() {
         iconView.setImage(null);
     }
 }
