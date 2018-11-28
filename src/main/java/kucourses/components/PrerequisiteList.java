@@ -1,11 +1,11 @@
-package me.iampeach.kucourses.components;
+package kucourses.components;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import me.iampeach.kucourses.models.CourseList;
-import me.iampeach.kucourses.models.Prerequisite;
+import kucourses.models.Prerequisite;
+import kucourses.services.CourseData;
 
 import java.io.IOException;
 
@@ -27,8 +27,8 @@ class PrerequisiteList extends VBox {
     private void init(Prerequisite prerequisite) {
         type.setText(getTypeText(prerequisite.getType()));
 
-        for (String course : prerequisite.getCourses()) {
-            CourseListItem item = new CourseListItem(sideBar, CourseList.getInstance().getById(course), true);
+        for (String course : prerequisite.getCourseIds()) {
+            CourseListItem item = new CourseListItem(sideBar, CourseData.getInstance().getById(course), true);
             getChildren().add(item);
         }
     }

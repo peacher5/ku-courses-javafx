@@ -4,8 +4,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1060.0" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.iampeach.kucourses.controllers.MainController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="690.0" prefWidth="1060.0" stylesheets="@../styles/main.css"
+            xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="kucourses.controllers.MainController">
    <center>
       <ScrollPane fx:id="scrollWrapper" fitToWidth="true" style="-fx-background-color: #000;" styleClass="edge-to-edge" BorderPane.alignment="CENTER">
          <content>

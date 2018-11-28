@@ -1,6 +1,6 @@
-package me.iampeach.kucourses.models;
+package kucourses.models;
 
-class CourseGroup {
+public class CourseGroup {
     private final int year;
     private final int semester;
     private final Course[] courses;
@@ -11,15 +11,15 @@ class CourseGroup {
         this.courses = courses;
     }
 
-    int getYear() {
+    public int getYear() {
         return year;
     }
 
-    int getSemester() {
+    public int getSemester() {
         return semester;
     }
 
-    Course[] getCourses() {
+    public Course[] getCourses() {
         return courses;
     }
 }

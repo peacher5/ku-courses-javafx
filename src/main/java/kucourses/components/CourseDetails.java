@@ -1,4 +1,4 @@
-package me.iampeach.kucourses.components;
+package kucourses.components;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import me.iampeach.kucourses.models.Course;
+import kucourses.models.Course;
+import kucourses.models.Prerequisite;
 
 import java.io.IOException;
 
@@ -14,7 +15,6 @@ class CourseDetails extends VBox {
 
     @FXML
     private Label nameLabel, subLabel, descriptionLabel;
-
 
     CourseDetails(SideBar sideBar, Course course) {
         loadFXML();
@@ -33,7 +33,10 @@ class CourseDetails extends VBox {
         subLabel.setText(course.getId() + " - " + course.getCredit() + " หน่วยกิต");
         descriptionLabel.setText(course.getDescription());
 
-        PrerequisiteList prerequisiteList = new PrerequisiteList(sideBar, course.getPrerequisite());
+        Prerequisite prerequisite = course.getPrerequisite();
+        if (prerequisite == null)
+            return;
+        PrerequisiteList prerequisiteList = new PrerequisiteList(sideBar, prerequisite);
         getChildren().add(2, prerequisiteList);
     }
 

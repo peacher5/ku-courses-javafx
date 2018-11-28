@@ -1,7 +1,7 @@
 #pass-button {
     -fx-background-color: white;
     -fx-background-radius: 22px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.06), 6, 0, 0, 2);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.08), 6, 0, 0, 2);
 }
 
 #pass-button:hover {

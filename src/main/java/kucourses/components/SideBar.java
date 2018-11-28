@@ -1,10 +1,11 @@
-package me.iampeach.kucourses.components;
+package kucourses.components;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import me.iampeach.kucourses.models.Course;
+import kucourses.models.Course;
+import kucourses.models.CourseUtil;
 
 public class SideBar extends BorderPane {
 
@@ -19,11 +20,19 @@ public class SideBar extends BorderPane {
         setCenter(courseDetails);
         setAlignment(courseDetails, Pos.TOP_LEFT);
 
-        // Pass Button
-        PassButton passButton = new PassButton(course);
-        setBottom(passButton);
-        setAlignment(passButton, Pos.CENTER);
-        setMargin(passButton, new Insets(0, 0, 44, 0));
+        if (course.isPassed() || CourseUtil.isAvailable(course)) {
+            // Pass Button
+            PassButton passButton = new PassButton(course);
+            setBottom(passButton);
+            setAlignment(passButton, Pos.CENTER);
+            setMargin(passButton, new Insets(0, 0, 44, 0));
+        } else {
+            Label error = new Label("- ยังไม่ผ่านเงื่อนไข -");
+            error.setId("sidebar-error");
+            setBottom(error);
+            setAlignment(error, Pos.CENTER);
+            setMargin(error, new Insets(0, 0, 50, 0));
+        }
     }
 
     private void showDefault() {

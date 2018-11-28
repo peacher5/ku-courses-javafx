@@ -1,4 +1,4 @@
-package me.iampeach.kucourses.models;
+package kucourses.models;
 
 public class Course {
     private final String id;
@@ -39,9 +39,7 @@ public class Course {
 
     public void setPassed(boolean passed) {
         isPassed = passed;
-    }
 
-    public void updateListener() {
         if (listener != null)
             listener.onToggle(isPassed);
     }

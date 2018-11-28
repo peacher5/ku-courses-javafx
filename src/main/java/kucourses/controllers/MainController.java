@@ -1,23 +1,19 @@
-package me.iampeach.kucourses.controllers;
+package kucourses.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import me.iampeach.kucourses.components.CourseListItem;
-import me.iampeach.kucourses.components.CourseSectionLabel;
-import me.iampeach.kucourses.components.SideBar;
-import me.iampeach.kucourses.models.Course;
-import me.iampeach.kucourses.models.CourseList;
-import me.iampeach.kucourses.utils.DatabaseUtils;
+import javafx.stage.Stage;
+import kucourses.components.CourseListItem;
+import kucourses.components.CourseSectionLabel;
+import kucourses.components.SideBar;
+import kucourses.models.Course;
+import kucourses.services.CourseData;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class MainController implements Initializable {
+public class MainController {
 
     @FXML
     private BorderPane root;
@@ -28,9 +24,7 @@ public class MainController implements Initializable {
     @FXML
     private ScrollPane scrollWrapper;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void init() {
         // Fix slow scrolling with mouse in Windows
         if (System.getProperty("os.name").startsWith("Windows"))
             fixSlowScrolling();
@@ -40,8 +34,7 @@ public class MainController implements Initializable {
         root.setRight(sideBar);
 
         // Init CourseList for 1st time
-        CourseList courseList = CourseList.getInstance(
-                DatabaseUtils.getCourseGroupsJson());
+        CourseData courseData = CourseData.getInstance();
 
         // Display courses table
         for (int year = 1; year <= 4; year++) {
@@ -57,7 +50,7 @@ public class MainController implements Initializable {
                 CourseSectionLabel label = new CourseSectionLabel(String.format("ปีที่ %d ภาค%s", year, semesterText));
                 coursesContainer.getChildren().add(label);
 
-                Course[] courses = courseList.getAll(year, semester);
+                Course[] courses = courseData.getAll(year, semester);
                 for (Course course : courses)
                     coursesContainer.getChildren().add(new CourseListItem(sideBar, course));
 
@@ -65,6 +58,13 @@ public class MainController implements Initializable {
             }
             listContainer.getChildren().add(yearContainer);
         }
+
+        initSavePassedOnClose();
+    }
+
+    private void initSavePassedOnClose() {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setOnHiding(event -> CourseData.getInstance().savePassedCourses());
     }
 
     private void fixSlowScrolling() {

@@ -1,4 +1,4 @@
-package me.iampeach.kucourses.components;
+package kucourses.components;
 
 import javafx.scene.control.Label;
 

@@ -1,4 +1,4 @@
-package me.iampeach.kucourses.components;
+package kucourses.components;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
-import me.iampeach.kucourses.models.Course;
+import kucourses.models.Course;
 
 import java.io.IOException;
 

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.iampeach</groupId>
-    <artifactId>ku-courses-javafx</artifactId>
+    <artifactId>ku-courseIds-javafx</artifactId>
     <version>1.0</version>
 
     <properties>
