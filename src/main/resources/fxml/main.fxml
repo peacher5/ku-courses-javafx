@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -8,14 +9,25 @@
             prefHeight="690.0" prefWidth="1060.0" stylesheets="@../styles/main.css"
             xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="kucourses.controllers.MainController">
-   <center>
-      <ScrollPane fx:id="scrollWrapper" fitToWidth="true" style="-fx-background-color: #000;" styleClass="edge-to-edge" BorderPane.alignment="CENTER">
-         <content>
-            <VBox fx:id="listContainer" spacing="10.0">
-               <padding>
-                  <Insets bottom="26.0" left="30.0" right="30.0" top="20.0" />
-               </padding></VBox>
-         </content>
-      </ScrollPane>
-   </center>
+    <center>
+        <ScrollPane fx:id="scrollWrapper" fitToWidth="true" style="-fx-background-color: #000;"
+                    styleClass="edge-to-edge">
+            <content>
+                <VBox>
+                    <children>
+                        <VBox id="header" alignment="CENTER" minHeight="50.0">
+                            <children>
+                                <Label id="header-label" fx:id="headerLabel"/>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="listContainer" spacing="10.0">
+                            <padding>
+                                <Insets bottom="26.0" left="30.0" right="30.0"/>
+                            </padding>
+                        </VBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
 </BorderPane>

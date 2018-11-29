@@ -2,6 +2,7 @@ package kucourses.controllers;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -12,6 +13,7 @@ import kucourses.components.CourseSectionLabel;
 import kucourses.components.SideBar;
 import kucourses.models.Course;
 import kucourses.services.CourseData;
+import kucourses.services.CourseData.DataInfo;
 
 public class MainController {
 
@@ -24,7 +26,10 @@ public class MainController {
     @FXML
     private ScrollPane scrollWrapper;
 
-    public void init() {
+    @FXML
+    private Label headerLabel;
+
+    public void init(DataInfo dataInfo) {
         // Fix slow scrolling with mouse in Windows
         if (System.getProperty("os.name").startsWith("Windows"))
             fixSlowScrolling();
@@ -34,7 +39,9 @@ public class MainController {
         root.setRight(sideBar);
 
         // Init CourseList for 1st time
-        CourseData courseData = CourseData.getInstance();
+        CourseData courseData = CourseData.getInstance(dataInfo);
+
+        headerLabel.setText("วิชาบังคับใน" + courseData.getDataInfo().getTitle());
 
         // Display courses table
         for (int year = 1; year <= 4; year++) {

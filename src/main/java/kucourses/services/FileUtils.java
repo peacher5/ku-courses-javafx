@@ -29,6 +29,11 @@ class FileUtils {
         }
     }
 
+    static boolean isFileExists(String fileName) throws URISyntaxException {
+        File file = new File(getJarDirPath() + "/" + fileName);
+        return file.exists() && !file.isDirectory();
+    }
+
     private static String getJarDirPath() throws URISyntaxException {
         return new File(FileUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
     }

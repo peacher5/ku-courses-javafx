@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class PassedCourses {
 
-    @SerializedName("course_year")
-    private String courseYear;
+    @SerializedName("data_name")
+    private String dataName;
 
     @SerializedName("passed")
     private String[] passedCoursesId;
 
-    public PassedCourses(String courseYear, String[] passedCoursesId) {
-        this.courseYear = courseYear;
+    public PassedCourses(String dataName, String[] passedCoursesId) {
+        this.dataName = dataName;
         this.passedCoursesId = passedCoursesId;
     }
 
-    public String getCourseYear() {
-        return courseYear;
+    public String getDataName() {
+        return dataName;
     }
 
     public String[] getPassedCoursesId() {
