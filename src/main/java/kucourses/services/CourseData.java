@@ -51,8 +51,8 @@ public class CourseData {
         throw new IllegalArgumentException(String.format("Courses not found (year=%d, semester=%d)", year, semester));
     }
 
-    public Plan getPlan() {
-        return plan;
+    public String getPlanTitle() {
+        return plan.getName();
     }
 
     String[] getPassedCourseIds() {

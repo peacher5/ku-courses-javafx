@@ -7,23 +7,14 @@ import kucourses.models.Plan;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.TreeMap;
 
 public class PlanData {
     private static final String dir = "plans";
-    private static PlanData instance;
 
-    private PlanData() {
-    }
-
-    public static PlanData getInstance() {
-        if (instance == null)
-            instance = new PlanData();
-        return instance;
-    }
-
-    public TreeMap<String, Plan> getAllPlans() {
-        TreeMap<String, Plan> plans = new TreeMap<>();
+    public static TreeMap<String, Plan> getAllPlans() {
+        TreeMap<String, Plan> plans = new TreeMap<>(Collections.reverseOrder());
         try {
             File planDir = new File(FileUtils.getJarDirPath() + "/" + dir);
             File[] files = planDir.listFiles();

@@ -42,7 +42,7 @@ public class MainController {
         // Init CourseData for 1st time
         CourseData courseData = CourseData.getInstance(user);
 
-        headerLabel.setText("วิชาบังคับใน" + courseData.getPlan().getName());
+        headerLabel.setText("วิชาบังคับใน" + courseData.getPlanTitle());
 
         // Display courses table
         for (int year = 1; year <= 4; year++) {

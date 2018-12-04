@@ -7,11 +7,9 @@ import javafx.stage.Stage;
 import kucourses.WindowManager;
 import kucourses.components.DataInfoListItem;
 import kucourses.models.Plan;
-import kucourses.models.User;
 import kucourses.services.PlanData;
 import kucourses.services.UserData;
 
-import java.util.Set;
 import java.util.TreeMap;
 
 public class CourseDataSelectController {
@@ -19,25 +17,25 @@ public class CourseDataSelectController {
     private VBox selectContainer;
 
     public void init() {
-        TreeMap<String, Plan> plans = PlanData.getInstance().getAllPlans();
-        Set<String> planNames = plans.keySet();
+        TreeMap<String, Plan> plans = PlanData.getAllPlans();
 
-        if (planNames.size() == 0) {
+        if (plans.size() == 0) {
             Label noPlanLabel = new Label("- ไม่พบข้อมูลแผนการศึกษา -");
             selectContainer.getChildren().add(noPlanLabel);
             return;
         }
 
-        for (String planName : planNames) {
-            DataInfoListItem item = new DataInfoListItem(plans.get(planName).getName());
+        UserData userData = UserData.getInstance();
+        plans.forEach((name, plan) -> {
+            DataInfoListItem item = new DataInfoListItem(plans.get(name).getName());
             item.setOnClickListenser(() -> {
-                WindowManager.showMainWindow(new Stage(), new User(planName, new String[0]));
-                UserData.getInstance().initData(planName);
+                userData.initData(name);
+                WindowManager.showMainWindow(new Stage(), userData.getData());
                 Stage stage = (Stage) selectContainer.getScene().getWindow();
                 stage.close();
             });
 
             selectContainer.getChildren().add(item);
-        }
+        });
     }
 }
