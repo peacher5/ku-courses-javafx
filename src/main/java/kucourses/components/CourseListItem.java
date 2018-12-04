@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import kucourses.models.Course;
-import kucourses.models.CourseUtil;
+import kucourses.models.CourseUtils;
 
 import java.io.IOException;
 
@@ -61,15 +61,15 @@ public class CourseListItem extends AnchorPane {
         if (!isPrerequisiteMode) {
             if (course.isPassed())
                 setPassedIcon();
-            else if (!CourseUtil.isAvailable(course))
+            else if (!CourseUtils.isAvailable(course))
                 setLockedIcon();
             else if (course.getPrerequisite() != null)
                 setUnlockedIcon();
             else
                 setNoIcon();
 
-            CourseUtil.setOnPassToggleListenerToAllCourses(eachCourse -> {
-                if (CourseUtil.isAvailable(course)) {
+            CourseUtils.setOnPassToggleListenerToAllCourses(eachCourse -> {
+                if (CourseUtils.isAvailable(course)) {
                     if (course.isPassed())
                         setPassedIcon();
                     else if (course.getPrerequisite() != null)

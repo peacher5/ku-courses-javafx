@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Prerequisite {
     private final Type type;
 
-    @SerializedName("courses")
+    @SerializedName("ids")
     private final String[] courseIds;
 
     public enum Type {

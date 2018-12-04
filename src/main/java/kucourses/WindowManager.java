@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import kucourses.controllers.CourseDataSelectController;
 import kucourses.controllers.MainController;
-import kucourses.services.CourseData.DataInfo;
+import kucourses.models.User;
 
 import java.io.IOException;
 
@@ -46,9 +46,9 @@ public class WindowManager {
         controller.init();
     }
 
-    public static void showMainWindow(Stage stage, DataInfo dataInfo) {
+    public static void showMainWindow(Stage stage, User user) {
         MainController controller = (MainController) showWindow(stage, Window.MAIN);
-        controller.init(dataInfo);
+        controller.init(user);
     }
 
     private static Object showWindow(Stage stage, Window window) {

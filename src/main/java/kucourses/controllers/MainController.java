@@ -12,8 +12,9 @@ import kucourses.components.CourseListItem;
 import kucourses.components.CourseSectionLabel;
 import kucourses.components.SideBar;
 import kucourses.models.Course;
+import kucourses.models.User;
 import kucourses.services.CourseData;
-import kucourses.services.CourseData.DataInfo;
+import kucourses.services.UserData;
 
 public class MainController {
 
@@ -29,7 +30,7 @@ public class MainController {
     @FXML
     private Label headerLabel;
 
-    public void init(DataInfo dataInfo) {
+    public void init(User user) {
         // Fix slow scrolling with mouse in Windows
         if (System.getProperty("os.name").startsWith("Windows"))
             fixSlowScrolling();
@@ -38,10 +39,10 @@ public class MainController {
         SideBar sideBar = new SideBar();
         root.setRight(sideBar);
 
-        // Init CourseList for 1st time
-        CourseData courseData = CourseData.getInstance(dataInfo);
+        // Init CourseData for 1st time
+        CourseData courseData = CourseData.getInstance(user);
 
-        headerLabel.setText("วิชาบังคับใน" + courseData.getDataInfo().getTitle());
+        headerLabel.setText("วิชาบังคับใน" + courseData.getPlan().getName());
 
         // Display courses table
         for (int year = 1; year <= 4; year++) {
@@ -57,7 +58,7 @@ public class MainController {
                 CourseSectionLabel label = new CourseSectionLabel(String.format("ปีที่ %d ภาค%s", year, semesterText));
                 coursesContainer.getChildren().add(label);
 
-                Course[] courses = courseData.getAll(year, semester);
+                Course[] courses = courseData.getByGroup(year, semester);
                 for (Course course : courses)
                     coursesContainer.getChildren().add(new CourseListItem(sideBar, course));
 
@@ -71,7 +72,7 @@ public class MainController {
 
     private void initSavePassedOnClose() {
         Stage stage = (Stage) root.getScene().getWindow();
-        stage.setOnHiding(event -> CourseData.getInstance().savePassedCourses());
+        stage.setOnHiding(event -> UserData.getInstance().save());
     }
 
     private void fixSlowScrolling() {

@@ -8,17 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 class FileUtils {
-    static String readFileInside(String fileName) throws IOException {
-        byte[] encoded = FileUtils.class.getResourceAsStream(fileName).readAllBytes();
-        return new String(encoded, StandardCharsets.UTF_8);
-    }
-
-    static String readFileOutside(String fileName) throws IOException, URISyntaxException {
+    static String readFile(String fileName) throws IOException, URISyntaxException {
         return new String(Files.readAllBytes(Paths.get(getJarDirPath() + "/" + fileName)));
     }
 
@@ -34,7 +28,7 @@ class FileUtils {
         return file.exists() && !file.isDirectory();
     }
 
-    private static String getJarDirPath() throws URISyntaxException {
+    static String getJarDirPath() throws URISyntaxException {
         return new File(FileUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
     }
 }

@@ -9,7 +9,7 @@
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="kucourses.controllers.CourseDataSelectController">
     <children>
         <Label id="header-label" text="เลือกแผนการศึกษา"/>
-        <VBox fx:id="selectContainer" spacing="20.0"/>
+        <VBox fx:id="selectContainer" alignment="TOP_CENTER" spacing="20.0"/>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>

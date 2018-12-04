@@ -1,116 +1,39 @@
 package kucourses.services;
 
-import com.google.gson.Gson;
 import kucourses.models.Course;
 import kucourses.models.CourseGroup;
-import kucourses.models.PassedCourses;
+import kucourses.models.Plan;
+import kucourses.models.User;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class CourseData {
     private static CourseData courseData;
-    private static final String userDataPath = "user.json";
+    private Plan plan;
 
-    private CourseGroup[] courseGroups;
-    private DataInfo dataInfo;
-
-    public enum DataInfo {
-        YEAR_61("courses_61", "แผนการศึกษาปี 2561"),
-        YEAR_60("courses_60", "แผนการศึกษาปี 2560"),
-        YEAR_55_BIO("courses_55_bio", "แผนการศึกษาปี 2555 (ชีววิทยา - โครงงาน)"),
-        YEAR_55_CHEM("courses_55_chem", "แผนการศึกษาปี 2555 (เคมี - โครงงาน)");
-
-        private String dataName, title;
-
-        DataInfo(String dataName, String title) {
-            this.dataName = dataName;
-            this.title = title;
-        }
-
-        public String getPath() {
-            return "/data/" + dataName + ".json";
-        }
-
-        public String getName() {
-            return dataName;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public static DataInfo toDataInfo(String dataName) {
-            for (DataInfo dataInfo : DataInfo.values())
-                if (dataInfo.getName().equals(dataName))
-                    return dataInfo;
-            return null;
-        }
-    }
-
-    private CourseData(DataInfo dataInfo) {
-        this.dataInfo = dataInfo;
-
-        String courseDataJson, userDataJson;
-        try {
-            courseDataJson = FileUtils.readFileInside(dataInfo.getPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        Gson gson = new Gson();
-        courseGroups = gson.fromJson(courseDataJson, CourseGroup[].class);
+    private CourseData(User user) {
+        plan = PlanData.getPlan(user.getPlanName());
 
         // Init passed courses
-        try {
-            userDataJson = FileUtils.readFileOutside(userDataPath);
-        } catch (IOException | URISyntaxException e) {
-            return;
-        }
-
-        PassedCourses passedCourses = gson.fromJson(userDataJson, PassedCourses.class);
-
-        if (dataInfo.getName().equals(passedCourses.getDataName()))
-            for (String courseId : passedCourses.getPassedCoursesId())
-                getById(courseId).setPassed(true);
+        for (String courseId : user.getPassedCourseIds())
+            getById(courseId).setPassed(true);
     }
 
     public static CourseData getInstance() {
         if (courseData != null)
             return courseData;
-        throw new IllegalStateException("DataInfo must be provided for 1st time used");
+        throw new IllegalStateException("User data must be provided for 1st time used");
     }
 
-    public static CourseData getInstance(DataInfo dataInfo) {
+    public static CourseData getInstance(User user) {
         if (courseData != null)
-            return courseData;
-        courseData = new CourseData(dataInfo);
+            throw new IllegalStateException("User data is already provided");
+        courseData = new CourseData(user);
         return courseData;
     }
 
-    public static boolean isUserDataExists() {
-        try {
-            return FileUtils.isFileExists(userDataPath);
-        } catch (URISyntaxException e) {
-            return false;
-        }
-    }
-
-    public static String getDataNameFromUserData() {
-        String userDataJson = null;
-        try {
-            userDataJson = FileUtils.readFileOutside(userDataPath);
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-        PassedCourses passedCourses = new Gson().fromJson(userDataJson, PassedCourses.class);
-        return passedCourses.getDataName();
-    }
-
     public Course getById(String id) {
-        for (CourseGroup courseGroup : courseGroups)
+        for (CourseGroup courseGroup : plan.getData())
             for (Course course : courseGroup.getCourses())
                 if (course.getId().equals(id))
                     return course;
@@ -118,32 +41,26 @@ public class CourseData {
     }
 
     public CourseGroup[] getAll() {
-        return courseGroups;
+        return plan.getData();
     }
 
-    public Course[] getAll(int year, int semester) {
-        for (CourseGroup courseGroup : courseGroups)
+    public Course[] getByGroup(int year, int semester) {
+        for (CourseGroup courseGroup : plan.getData())
             if (courseGroup.getYear() == year && courseGroup.getSemester() == semester)
                 return courseGroup.getCourses();
         throw new IllegalArgumentException(String.format("Courses not found (year=%d, semester=%d)", year, semester));
     }
 
-    public DataInfo getDataInfo() {
-        return dataInfo;
+    public Plan getPlan() {
+        return plan;
     }
 
-    public void savePassedCourses() {
+    String[] getPassedCourseIds() {
         ArrayList<String> passedCourseIds = new ArrayList<>();
-        for (CourseGroup courseGroup : courseGroups)
+        for (CourseGroup courseGroup : plan.getData())
             for (Course course : courseGroup.getCourses())
                 if (course.isPassed())
                     passedCourseIds.add(course.getId());
-
-        PassedCourses passedCourses = new PassedCourses(dataInfo.getName(), passedCourseIds.toArray(new String[0]));
-        try {
-            FileUtils.writeJsonFile(userDataPath, passedCourses);
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
+        return passedCourseIds.toArray(new String[0]);
     }
 }

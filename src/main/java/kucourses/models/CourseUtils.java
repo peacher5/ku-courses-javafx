@@ -2,7 +2,7 @@ package kucourses.models;
 
 import kucourses.services.CourseData;
 
-public class CourseUtil {
+public class CourseUtils {
     public static boolean isAvailable(Course course) {
         Prerequisite prerequisite = course.getPrerequisite();
         if (prerequisite == null)

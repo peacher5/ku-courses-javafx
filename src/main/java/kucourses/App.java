@@ -2,14 +2,13 @@ package kucourses;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import kucourses.services.CourseData;
-import kucourses.services.CourseData.DataInfo;
+import kucourses.services.UserData;
 
 public class App extends Application {
     @Override
     public void start(Stage stage) {
-        if (CourseData.isUserDataExists())
-            WindowManager.showMainWindow(stage, DataInfo.toDataInfo(CourseData.getDataNameFromUserData()));
+        if (UserData.isExists())
+            WindowManager.showMainWindow(stage, UserData.getInstance().getData());
         else
             WindowManager.showCourseDataSelectWindow(stage);
     }
