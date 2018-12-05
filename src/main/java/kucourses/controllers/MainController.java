@@ -2,6 +2,7 @@ package kucourses.controllers;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -31,6 +32,23 @@ public class MainController {
     private Label headerLabel;
 
     public void init(User user) {
+
+        // Init CourseData for 1st time
+        CourseData courseData;
+        try {
+            courseData = CourseData.getInstance(user);
+        } catch (IllegalArgumentException e) {
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.close();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("An error with user selected plan");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            return;
+        }
+
         // Fix slow scrolling with mouse in Windows
         if (System.getProperty("os.name").startsWith("Windows"))
             fixSlowScrolling();
@@ -38,9 +56,6 @@ public class MainController {
         // Init SideBar
         SideBar sideBar = new SideBar();
         root.setRight(sideBar);
-
-        // Init CourseData for 1st time
-        CourseData courseData = CourseData.getInstance(user);
 
         headerLabel.setText("วิชาบังคับใน" + courseData.getPlanTitle());
 

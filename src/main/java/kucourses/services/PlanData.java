@@ -24,9 +24,12 @@ public class PlanData {
                         String fileName = file.getName();
                         if (fileName.endsWith(".json")) {
                             String planName = fileName.substring(0, fileName.lastIndexOf(".json"));
-                            Plan plan = getPlan(planName);
-                            if (plan != null)
+                            try {
+                                Plan plan = getPlan(planName);
                                 plans.put(planName, plan);
+                            } catch (IllegalArgumentException e) {
+                                // ignore if json format is invalid
+                            }
                         }
                     }
                 }
@@ -42,13 +45,12 @@ public class PlanData {
         try {
             planJson = FileUtils.readFile(dir + "/" + name + ".json");
         } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
             throw new IllegalArgumentException("Plan '" + name + ".json' not found");
         }
         try {
             return new Gson().fromJson(planJson, Plan.class);
         } catch (JsonSyntaxException e) {
-            return null;
+            throw new IllegalArgumentException("Plan '" + name + ".json' is not a valid format");
         }
     }
 }
