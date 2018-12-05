@@ -8,12 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 class FileUtils {
     static String readFile(String fileName) throws IOException, URISyntaxException {
-        return new String(Files.readAllBytes(Paths.get(getJarDirPath() + "/" + fileName)));
+        return new String(Files.readAllBytes(Paths.get(getJarDirPath() + "/" + fileName)), StandardCharsets.UTF_8);
     }
 
     static void writeJsonFile(String fileName, Object object) throws IOException, URISyntaxException {
