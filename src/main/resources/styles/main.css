@@ -42,3 +42,15 @@
     -fx-text-fill: #555556;
     -fx-padding: 4px 0 0 0;
 }
+
+.diff-easy {
+    -fx-background-color: #66D16B;
+}
+
+.diff-medium {
+    -fx-background-color: #FFAA46;
+}
+
+.diff-hard {
+    -fx-background-color: #FF6A46;
+}

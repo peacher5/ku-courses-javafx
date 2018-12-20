@@ -7,6 +7,8 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import kucourses.models.Course;
+import kucourses.models.CourseDifficulty;
+import kucourses.models.CourseDifficulty.Level;
 import kucourses.models.Prerequisite;
 
 import java.io.IOException;
@@ -14,7 +16,9 @@ import java.io.IOException;
 class CourseDetails extends VBox {
 
     @FXML
-    private Label nameLabel, subLabel, descriptionLabel;
+    private Label nameLabel, subLabel, descriptionLabel, diffLabel;
+    @FXML
+    private VBox diffBg;
 
     CourseDetails(SideBar sideBar, Course course) {
         loadFXML();
@@ -32,6 +36,17 @@ class CourseDetails extends VBox {
 
         subLabel.setText(course.getId() + " - " + course.getCredit() + " หน่วยกิต");
         descriptionLabel.setText(course.getDescription());
+
+        Level level = CourseDifficulty.getLevel(course.getDifficulty());
+
+        diffLabel.setText(level.getText());
+
+        if (level == CourseDifficulty.Level.EASY)
+            diffBg.getStyleClass().add("diff-easy");
+        else if (level == CourseDifficulty.Level.MEDIUM)
+            diffBg.getStyleClass().add("diff-medium");
+        else
+            diffBg.getStyleClass().add("diff-hard");
 
         Prerequisite prerequisite = course.getPrerequisite();
         if (prerequisite == null)

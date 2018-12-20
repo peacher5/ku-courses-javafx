@@ -7,15 +7,17 @@ public class Course {
     private final String name;
     private final int credit;
     private final String description;
+    private final int difficulty;
     private final Prerequisite prerequisite;
     private boolean isPassed;
     private ArrayList<OnPassToggleListener> listeners;
 
-    public Course(String id, String name, int credit, String description, Prerequisite prerequisite) {
+    public Course(String id, String name, int credit, String description, int difficulty, Prerequisite prerequisite) {
         this.id = id;
         this.name = name;
         this.credit = credit;
         this.description = description;
+        this.difficulty = difficulty;
         this.prerequisite = prerequisite;
     }
 
@@ -33,6 +35,10 @@ public class Course {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
     }
 
     public Prerequisite getPrerequisite() {

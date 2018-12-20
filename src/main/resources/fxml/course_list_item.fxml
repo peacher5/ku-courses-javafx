@@ -3,15 +3,24 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.*?>
 <fx:root id="course-list-item" prefHeight="60.0" prefWidth="340.0" type="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label id="course-list-item-title" fx:id="titleLabel" text="Name" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
         </Label>
-        <Label id="course-list-item-sub" fx:id="subLabel" text="desc" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
-        </Label>
       <ImageView fx:id="iconView" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+        <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <children>
+                <Label id="course-list-item-sub" fx:id="subLabel" text="desc">
+                </Label>
+                <Pane id="course-list-item-diff-bar-bg" fx:id="diffBg" maxHeight="4.0" prefWidth="66.0"
+                      translateY="0.5">
+                    <children>
+                        <Pane id="course-list-item-diff-bar-fg" fx:id="diffBar" prefHeight="4.0" prefWidth="4.0"/>
+                    </children>
+                </Pane>
+            </children>
+        </HBox>
     </children>
     <padding>
         <Insets bottom="5.0" left="16.0" right="16.0" top="5.0" />

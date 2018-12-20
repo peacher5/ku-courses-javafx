@@ -22,3 +22,13 @@
     -fx-font-weight: bold;
     -fx-text-fill: #8F8F8F;
 }
+
+#course-details-diff {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}
+
+#course-details-diff-bg {
+    -fx-background-radius: 9px;
+}
