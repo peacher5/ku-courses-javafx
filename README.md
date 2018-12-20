@@ -3,7 +3,7 @@
 JavaFX Project (Software Construction @ CS KU)
 
 ### Download
-[ku-courses-javafx-1.1.1.zip][download] (0.49 MB)
+[ku-courses-javafx-1.2.zip][download] (0.5 MB)
 
 ### Screenshots
 
@@ -13,4 +13,4 @@ JavaFX Project (Software Construction @ CS KU)
 
 ![Main](../assets/main.png?raw=true)
 
-[download]: https://github.com/peacher5/ku-courses-javafx/releases/download/1.1.1/ku-courses-javafx-1.1.1.zip
+[download]: https://github.com/peacher5/ku-courses-javafx/releases/download/1.2/ku-courses-javafx-1.2.zip
