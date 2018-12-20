@@ -7,7 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import kucourses.models.Course;
+import kucourses.models.CourseDifficulty;
+import kucourses.models.CourseDifficulty.Level;
 import kucourses.models.CourseUtils;
 
 import java.io.IOException;
@@ -18,6 +21,9 @@ public class CourseListItem extends AnchorPane {
 
     @FXML
     private ImageView iconView;
+
+    @FXML
+    private Pane diffBg, diffBar;
 
     private final SideBar sideBar;
     private final boolean isPrerequisiteMode;
@@ -59,6 +65,8 @@ public class CourseListItem extends AnchorPane {
         subLabel.setText(course.getId() + " - " + course.getCredit() + " หน่วยกิต");
 
         if (!isPrerequisiteMode) {
+            initDiffBar();
+
             if (course.isPassed())
                 setPassedIcon();
             else if (!CourseUtils.isAvailable(course))
@@ -88,6 +96,25 @@ public class CourseListItem extends AnchorPane {
             if (event.getButton() == MouseButton.PRIMARY)
                 sideBar.showCourseDetails(course);
         });
+    }
+
+    private void initDiffBar() {
+        double barFullWidth = diffBg.getPrefWidth();
+        int difficulty = course.getDifficulty();
+        double barWidth = barFullWidth * difficulty / 100;
+
+        if (barWidth < 4)
+            barWidth = 4;
+
+        diffBar.setPrefWidth(barWidth);
+
+        Level level = CourseDifficulty.getLevel(difficulty);
+        if (level == Level.EASY)
+            diffBar.getStyleClass().add("diff-easy");
+        else if (level == Level.MEDIUM)
+            diffBar.getStyleClass().add("diff-medium");
+        else
+            diffBar.getStyleClass().add("diff-hard");
     }
 
     private void setPassedIcon() {

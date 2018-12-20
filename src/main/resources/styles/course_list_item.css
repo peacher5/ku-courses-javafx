@@ -21,3 +21,12 @@
     -fx-font-size: 16px;
     -fx-text-fill: #838383;
 }
+
+#course-list-item-diff-bar-bg {
+    -fx-background-color: #E6E6E6;
+    -fx-background-radius: 2px;
+}
+
+#course-list-item-diff-bar-fg {
+    -fx-background-radius: 2px;
+}

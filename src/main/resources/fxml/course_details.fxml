@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" type="VBox" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label id="course-details-name" fx:id="nameLabel" text="Course Name" textOverrun="CENTER_ELLIPSIS" />
-      <Label id="course-details-sub" fx:id="subLabel" text="0XXXXXXX - X credit" />
+       <HBox spacing="10.0">
+           <children>
+               <Label id="course-details-sub" fx:id="subLabel" text="0XXXXXXX - X credit"/>
+               <VBox id="course-details-diff-bg" fx:id="diffBg" alignment="CENTER" prefHeight="17.0" translateY="-3.0">
+                   <children>
+                       <Label id="course-details-diff" fx:id="diffLabel" text="diff" translateY="0.5"/>
+                   </children>
+                   <padding>
+                       <Insets left="8.0" right="8.0"/>
+                   </padding>
+               </VBox>
+           </children>
+       </HBox>
       <Label id="course-details-desc-title" text="คำอธิบาย" />
       <Label id="course-details-description" fx:id="descriptionLabel" text="Course description" wrapText="true" />
    </children>
